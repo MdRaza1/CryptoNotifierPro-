@@ -1,4 +1,3 @@
-
 # CryptoNotifierPro Final Bot (Simplified Placeholder)
 
 from pyrogram import Client, filters
@@ -11,6 +10,7 @@ bot_token = "7818868232:AAEhGeLljnk96p_owTzWIVynH1eEqnLWMas"
 
 app = Client("CryptoNotifierPro", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
+
 @app.on_message(filters.command("start"))
 async def start(client, message):
     user = message.from_user
@@ -19,19 +19,22 @@ async def start(client, message):
 
 I'm CryptoNotifierPro – your all-in-one trading assistant.
 
-✅ Crypto + Stock Alerts
-✅ Strategy PDFs
-✅ Trade Setups
-✅ VIP Access & Referral Rewards
-✅ 24x7 Customer Support
+✅ Crypto + Stock Alerts  
+📘 Strategy PDFs  
+📊 Trade Setups  
+🔐 VIP Access & Referral Rewards  
+🤖 24x7 Customer Support
 
 Use the menu below or type /help to explore features.
 """
     await message.reply(welcome_text)
 
+
 @app.on_message(filters.command("help"))
 async def help_command(client, message):
-    await message.reply("📘 Use /start to begin.
-Use the buttons or type commands like /price BTC, /buyvip, /refer, etc.")
+    help_text = """🟦 Use /start to begin.
+Use the buttons or type commands like /price BTC, /buyvip, /refer, etc."""
+    await message.reply(help_text)
+
 
 app.run()
