@@ -1,0 +1,1 @@
+# Trailing SL, lot size, and psychology checks
