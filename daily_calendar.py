@@ -1,0 +1,1 @@
+# Daily trade calendar placeholder

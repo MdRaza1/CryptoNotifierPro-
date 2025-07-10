@@ -1,0 +1,1 @@
+# SL/TP, lot size calculator placeholder
