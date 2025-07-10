@@ -80,12 +80,25 @@ async def im_webhook(request: Request):
         await app_bot.send_message(uid, f"🎉 Payment confirmed! Your VIP ({plan}) is now active.")
     return {"status":"ok"}
 
+import asyncio
+import threading
+
 def run_bot():
+    try:
+        loop =
+asyncio.get_running_loop()
+    except RuntimeError:
+        loop =
+asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
     app_bot.run()
 
 def run_server():
     uvicorn.run(fast, host="0.0.0.0", port=8000)
 
-if __name__ == "__main__":
+    if __name__ == "__main__":
+    
     threading.Thread(target=run_bot).start()
+
     threading.Thread(target=run_server).start()
+    
