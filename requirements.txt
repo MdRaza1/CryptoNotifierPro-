@@ -1,0 +1,5 @@
+pyrogram
+tgcrypto
+requests
+flask
+instamojo-python==0.3.2
