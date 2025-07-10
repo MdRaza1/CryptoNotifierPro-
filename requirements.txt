@@ -3,3 +3,4 @@ tgcrypto
 requests
 flask
 instamojo-wrapper
+uvicorn
