@@ -1,1 +1,0 @@
-# Mini trading quiz & badge engine
