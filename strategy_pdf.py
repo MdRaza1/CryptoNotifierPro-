@@ -1,1 +1,0 @@
-# Serves intraday/swing/psychology PDFs
