@@ -1,1 +1,0 @@
-# Handles PDF requests from VIP users
