@@ -7,7 +7,7 @@ from fastapi import FastAPI
 # Config values
 from config import api_id, api_hash, bot_token
 
-# Feature Modules (jo tu ne bola hai sab linked hai)
+# Feature Modules
 from crypto_alerts import handle_crypto_alerts
 from coin_converter import convert_coin
 from crypto_news import send_crypto_news
@@ -41,18 +41,26 @@ from button_layout import get_main_keyboard
 from welcome_handler import send_welcome
 from help_command import show_help
 
+# Advanced Trading Tools
+from topcoin_tracker import auto_sector_tracker
+from journal_module import position_journal_handler
+from risk_analysis import risk_analyzer
+from psychology_alerts import stop_warning_handler
+from stock_calendar import stock_calendar_handler
+from swing_module import swing_analysis_handler
+from setup_archive import setup_archive_handler
+
 # Pyrogram Client
 app_bot = Client("CryptoNotifierPro", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
-# FastAPI for render healthcheck
+# FastAPI for Render healthcheck
 fast = FastAPI()
 
 @fast.get("/")
 async def root():
     return {"status": "running", "message": "CryptoNotifierPro API is live"}
 
-# 🔹 Basic Commands
-
+# 📌 Basic Commands
 @app_bot.on_message(filters.command("start"))
 async def start(client, message):
     await send_welcome(client, message)
@@ -61,8 +69,7 @@ async def start(client, message):
 async def help(client, message):
     await show_help(client, message)
 
-# 🔹 Feature Commands
-
+# 📌 Main Features
 @app_bot.on_message(filters.command("price"))
 async def price(client, message):
     await handle_crypto_alerts(client, message)
@@ -155,19 +162,7 @@ async def watchlist(client, message):
 async def calendar(client, message):
     await get_calendar(client, message)
 
-# 🌀 Start the bot and FastAPI together for Render
-
-def run_bot():
-    try:
-        loop = asyncio.get_running_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-
-        @app_bot.on_message(filters.command("badge"))
-async def badge_system(client, message):
-    await handle_performance_badge(client, message)
-
+# 📌 Bonus Advanced Features
 @app_bot.on_message(filters.command("topcoins"))
 async def topcoins_handler(client, message):
     await auto_sector_tracker(client, message)
@@ -196,11 +191,16 @@ async def swing_handler(client, message):
 async def setup_handler(client, message):
     await setup_archive_handler(client, message)
 
+# ✅ Start All Threads
+def run_bot():
     app_bot.run()
 
+def run_vip_checker():
+    check_and_expire_vip()
+
 if name == "main":
-    import uvicorn
     threading.Thread(target=run_bot).start()
-    threading.Thread(target=run_server).start()
-    threading.Thread(target=check_and_expire_vip).start()
-    uvicorn.run("bot:fast", host="0.0.0.0", port=8000, reload=False)
+    threading.Thread(target=run_vip_checker).start()
+
+    import uvicorn
+    uvicorn.run("bot:fast", host="0.0.0.0", port=8000)
