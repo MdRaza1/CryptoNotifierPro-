@@ -162,6 +162,39 @@ def run_bot():
     except RuntimeError:
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
+
+        @app_bot.on_message(filters.command("badge"))
+async def badge_system(client, message):
+    await handle_performance_badge(client, message)
+
+@app_bot.on_message(filters.command("topcoins"))
+async def topcoins_handler(client, message):
+    await auto_sector_tracker(client, message)
+
+@app_bot.on_message(filters.command("journal"))
+async def journal_handler(client, message):
+    await position_journal_handler(client, message)
+
+@app_bot.on_message(filters.command("risk"))
+async def risk_handler(client, message):
+    await risk_analyzer(client, message)
+
+@app_bot.on_message(filters.command("reminder"))
+async def reminder_handler(client, message):
+    await stop_warning_handler(client, message)
+
+@app_bot.on_message(filters.command("calendarstock"))
+async def calendarstock_handler(client, message):
+    await stock_calendar_handler(client, message)
+
+@app_bot.on_message(filters.command("swing"))
+async def swing_handler(client, message):
+    await swing_analysis_handler(client, message)
+
+@app_bot.on_message(filters.command("setup"))
+async def setup_handler(client, message):
+    await setup_archive_handler(client, message)
+
     app_bot.run()
 
 if name == "main":
