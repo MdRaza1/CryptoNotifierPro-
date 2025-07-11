@@ -1,7 +1,0 @@
-pyrogram
-tgcrypto
-requests
-fastapi
-uvicorn
-instamojo-wrapper
-flask
