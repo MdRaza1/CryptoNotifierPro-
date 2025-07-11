@@ -30,6 +30,7 @@ from vip_system import check_vip_status
 from referral_system import handle_referral
 from reward_tracker import check_referral_rewards
 from payment_gateway import handle_payment
+from vip_expiry_checker import check_and_expire_vip
 
 from support_bot import support_handler
 from admin_panel import admin_handler
