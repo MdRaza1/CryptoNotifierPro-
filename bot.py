@@ -40,6 +40,8 @@ def run_server():
     import uvicorn
     uvicorn.run(fast, host="0.0.0.0", port=8000)
 
-if __name__ == "__main__":
+if name == "main":
+    import uvicorn
     threading.Thread(target=run_bot).start()
-    threading.Thread(target=run_server).start()
+    uvicorn.run("bot:fast", host="0.0.0.0", port=8000, reload=False)
+    
