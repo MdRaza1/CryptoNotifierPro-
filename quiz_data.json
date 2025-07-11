@@ -1,0 +1,52 @@
+[
+  {
+    "question": "What is a candlestick?",
+    "options": ["A chart type", "A coin", "A strategy", "A stock"],
+    "answer": "A chart type"
+  },
+  {
+    "question": "Which is a bullish pattern?",
+    "options": ["Hammer", "Shooting Star", "Doji", "Bear Trap"],
+    "answer": "Hammer"
+  },
+  {
+    "question": "What does RSI indicate?",
+    "options": ["Price levels", "Market volume", "Overbought/Oversold", "Support & Resistance"],
+    "answer": "Overbought/Oversold"
+  },
+  {
+    "question": "What is stop loss?",
+    "options": ["Profit target", "Loss control price", "Buy entry", "Volume filter"],
+    "answer": "Loss control price"
+  },
+  {
+    "question": "Best time frame for intraday trading?",
+    "options": ["1 hour", "15 min", "1 day", "1 week"],
+    "answer": "15 min"
+  },
+  {
+    "question": "What is a breakout?",
+    "options": ["Reversal", "Price crossing a key level", "Volume drop", "No movement"],
+    "answer": "Price crossing a key level"
+  },
+  {
+    "question": "What does a Doji candle mean?",
+    "options": ["High momentum", "Reversal signal", "Flat market", "Volume spike"],
+    "answer": "Reversal signal"
+  },
+  {
+    "question": "What is position sizing?",
+    "options": ["Stop loss", "Lot size control", "Chart type", "Timeframe"],
+    "answer": "Lot size control"
+  },
+  {
+    "question": "Which indicator shows trend direction?",
+    "options": ["MACD", "RSI", "Stochastic", "Bollinger Bands"],
+    "answer": "MACD"
+  },
+  {
+    "question": "What is SL in trading?",
+    "options": ["Start Level", "Stop Loss", "Stock Limit", "Slow Line"],
+    "answer": "Stop Loss"
+  }
+]
