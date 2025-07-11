@@ -1,0 +1,13 @@
+== DEPLOY INSTRUCTIONS (GITHUB + RENDER) ==
+1. Push all files to a GitHub repo.
+2. Go to Render.com > New Web Service > Connect repo.
+3. Runtime: Python 3 | Build: pip install -r requirements.txt | Start: python3 bot.py
+4. Add Environment Variables:
+   API_ID=23765081
+   API_HASH=d5bf55b4bc9d9aa6e41a9719497b5c0f
+   BOT_TOKEN=7818868232:AAEhGeLljnk96p_owTzWIVynH1eEqnLWMas
+   ADMIN_ID=7556144909
+   IM_API_KEY=test_key
+   IM_AUTH_TOKEN=test_token
+   WEBHOOK_SECRET=anysecret
+5. Click Deploy. Done.
