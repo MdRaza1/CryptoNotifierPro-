@@ -201,4 +201,6 @@ async def setup_handler(client, message):
 if name == "main":
     import uvicorn
     threading.Thread(target=run_bot).start()
+    threading.Thread(target=run_server).start()
+    threading.Thread(target=check_and_expire_vip).start()
     uvicorn.run("bot:fast", host="0.0.0.0", port=8000, reload=False)
