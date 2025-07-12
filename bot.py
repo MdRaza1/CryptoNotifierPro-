@@ -17,7 +17,7 @@ from daily_stock_report import send_daily_stock_summary
 
 from strategy_pdf_sender import send_strategy_pdf
 from lot_size_calc import calculate_lot_size
-from psychology_alerts import send_psych_alert
+from psychology_alert import send_psych_alert
 from setup_archive import save_setup_result
 from performance_badge import give_performance_badge
 from trailing_sl import trailing_stoploss
