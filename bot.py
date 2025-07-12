@@ -16,7 +16,7 @@ from multi_timeframe import multi_timeframe_analysis
 from daily_stock_report import send_daily_stock_summary
 
 from strategy_pdf_sender import send_strategy_pdf
-from lot_size_calc import lot_size_calc
+from lot_size_calc import calculate_lot_size
 from psychology_alerts import send_psych_alert
 from setup_archive import save_setup_result
 from performance_badge import give_performance_badge
@@ -97,7 +97,21 @@ async def strategy(client, message):
 
 @app_bot.on_message(filters.command("lotcalc"))
 async def lotcalc(client, message):
-    await lot_size_calc(client, message)
+    try:
+        args = message.text.split()[1:]
+        if len(args) != 3:
+            raise ValueError("Invalid format")
+
+        capital = float(args[0])
+        risk_percent = float(args[1])
+        stop_loss = float(args[2])
+
+        from lot_size_calc import calculate_lot_size
+        result = calculate_lot_size(capital, risk_percent, stop_loss)
+        await message.reply(result)
+
+    except:
+        await message.reply("❗ Use format: /lotcalc 10000 1 5\n(capital risk_percent stop_loss)")
 
 @app_bot.on_message(filters.command("psych"))
 async def psych(client, message):
