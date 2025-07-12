@@ -22,7 +22,7 @@ from lot_size_calculator import lot_size_calc
 from psychology_alerts import send_psych_alert
 from setup_archive import save_setup_result
 from performance_badge import give_performance_badge
-from trailing_sl import trailing_stoploss
+from trailing_sl_calc import get_trailing_sl
 from multi_target import multi_target_alert
 from quiz_module import handle_quiz
 
@@ -112,7 +112,20 @@ async def badge(client, message):
 
 @app_bot.on_message(filters.command("trail"))
 async def trail(client, message):
-    await trailing_stoploss(client, message)
+    try:
+        args = message.text.split()[1:]
+        if len(args) != 3:
+            raise ValueError("Invalid arguments")
+
+        entry = float(args[0])
+        current = float(args[1])
+        trail_percent = float(args[2])
+
+        result = get_trailing_sl(entry, current, trail_percent)
+        await message.reply(result)
+
+    except Exception as e:
+        await message.reply("❗ Use format: /trail 100 95 2\n(entry current trail%)")
 
 @app_bot.on_message(filters.command("target"))
 async def target(client, message):
