@@ -20,7 +20,7 @@ from lot_size_calc import calculate_lot_size
 from psychology_alert import send_psych_alert
 from setup_archive import save_setup_result
 from performance_badge import give_performance_badge
-from trailing_sl import trailing_stoploss
+from trailing_sl_calc import trailing_stoploss
 from multi_target import multi_target_alert
 from quiz_module import handle_quiz
 
