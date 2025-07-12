@@ -21,7 +21,7 @@ from psychology_alert import send_psych_alert
 from setup_archive import save_setup_result
 from performance_badge import give_performance_badge
 from trailing_sl_calc import get_trailing_sl
-from multi_target import multi_target_alert
+from multi_target_alert import multi_target_alert
 from quiz_module import handle_quiz
 
 from vip_system import check_vip_status
