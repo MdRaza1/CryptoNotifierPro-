@@ -24,7 +24,7 @@ from setup_archive import save_setup_result
 from performance_badge import give_performance_badge
 from trailing_sl import trailing_stoploss
 from multi_target import multi_target_alert
-from quiz_module import handle_quiz
+from quiz_module import quiz_command
 
 from vip_system import check_vip_status
 from referral_system import handle_referral
@@ -120,7 +120,7 @@ async def target(client, message):
 
 @app_bot.on_message(filters.command("quiz"))
 async def quiz(client, message):
-    await handle_quiz(client, message)
+    await quiz_command(client, message)
 
 @app_bot.on_message(filters.command("vip"))
 async def vip(client, message):
