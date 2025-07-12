@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: CryptoNotifierPro
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python3 bot.py"
+    envVars:
+      - key: API_ID
+        value: 23765081
+      - key: API_HASH
+        value: d5bf55b4bc9d9aa6e41a9719497b5c0f
+      - key: BOT_TOKEN
+        value: 7818868232:AAEhGeLljnk96p_owTzWIVynH1eEqnLWMas
+      - key: ADMIN_ID
+        value: 7556144909
+      - key: USERNAME
+        value: CryptoRaza0
+      - key: REFERRAL_JSON
+        value: referral_data.json
+      - key: VIP_JSON
+        value: vip_members.json
+      - key: ALL_USERS_JSON
+        value: all_users.json
+      - key: STRATEGY_PDF_PATH
+        value: pdf/strategies/
+      - key: INSTA_API_KEY
+        value: your_instamojo_api_key
+      - key: INSTA_AUTH_TOKEN
+        value: your_instamojo_auth_token

@@ -4,10 +4,8 @@ import os
 from pyrogram import Client, filters
 from fastapi import FastAPI
 
-# Config values
 from config import api_id, api_hash, bot_token
 
-# Feature Modules (jo tu ne bola hai sab linked hai)
 from crypto_alerts import handle_crypto_alerts
 from coin_converter import convert_coin
 from crypto_news import send_crypto_news
@@ -17,9 +15,9 @@ from stock_timing_assistant import stock_timing
 from multi_timeframe import multi_timeframe_analysis
 from daily_stock_report import send_daily_stock_summary
 
-from strategy_pdf import send_strategy_pdf
-from lot_size_calculator import lot_size_calc
-from psychology_alerts import send_psych_alert
+from strategy_pdf_sender import send_strategy_pdf
+from lot_size_calc import calculate_lot_size
+from psychology_alert import send_psych_alert
 from setup_archive import save_setup_result
 from performance_badge import give_performance_badge
 from trailing_sl_calc import get_trailing_sl
@@ -30,6 +28,7 @@ from vip_system import check_vip_status
 from referral_system import handle_referral
 from reward_tracker import check_referral_rewards
 from payment_gateway import handle_payment
+from vip_expiry_checker import check_and_expire_vip
 
 from support_bot import support_handler
 from admin_panel import admin_handler
@@ -40,17 +39,21 @@ from button_layout import get_main_keyboard
 from welcome_handler import send_welcome
 from help_command import show_help
 
-# Pyrogram Client
+from topcoin_tracker import auto_sector_tracker
+from journal_module import position_journal_handler
+from risk_analysis import risk_analyzer
+from psychology_alerts import stop_warning_handler
+from stock_calendar import stock_calendar_handler
+from swing_module import swing_analysis_handler
+from setup_archive import setup_archive_handler
+
 app_bot = Client("CryptoNotifierPro", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
-# FastAPI for render healthcheck
 fast = FastAPI()
 
 @fast.get("/")
 async def root():
     return {"status": "running", "message": "CryptoNotifierPro API is live"}
-
-# 🔹 Basic Commands
 
 @app_bot.on_message(filters.command("start"))
 async def start(client, message):
@@ -59,8 +62,6 @@ async def start(client, message):
 @app_bot.on_message(filters.command("help"))
 async def help(client, message):
     await show_help(client, message)
-
-# 🔹 Feature Commands
 
 @app_bot.on_message(filters.command("price"))
 async def price(client, message):
@@ -96,7 +97,21 @@ async def strategy(client, message):
 
 @app_bot.on_message(filters.command("lotcalc"))
 async def lotcalc(client, message):
-    await lot_size_calc(client, message)
+    try:
+        args = message.text.split()[1:]
+        if len(args) != 3:
+            raise ValueError("Invalid format")
+
+        capital = float(args[0])
+        risk_percent = float(args[1])
+        stop_loss = float(args[2])
+
+        from lot_size_calc import calculate_lot_size
+        result = calculate_lot_size(capital, risk_percent, stop_loss)
+        await message.reply(result)
+
+    except:
+        await message.reply("❗ Use format: /lotcalc 10000 1 5\n(capital risk_percent stop_loss)")
 
 @app_bot.on_message(filters.command("psych"))
 async def psych(client, message):
@@ -167,17 +182,43 @@ async def watchlist(client, message):
 async def calendar(client, message):
     await get_calendar(client, message)
 
-# 🌀 Start the bot and FastAPI together for Render
+@app_bot.on_message(filters.command("topcoins"))
+async def topcoins_handler(client, message):
+    await auto_sector_tracker(client, message)
+
+@app_bot.on_message(filters.command("journal"))
+async def journal_handler(client, message):
+    await position_journal_handler(client, message)
+
+@app_bot.on_message(filters.command("risk"))
+async def risk_handler(client, message):
+    await risk_analyzer(client, message)
+
+@app_bot.on_message(filters.command("reminder"))
+async def reminder_handler(client, message):
+    await stop_warning_handler(client, message)
+
+@app_bot.on_message(filters.command("calendarstock"))
+async def calendarstock_handler(client, message):
+    await stock_calendar_handler(client, message)
+
+@app_bot.on_message(filters.command("swing"))
+async def swing_handler(client, message):
+    await swing_analysis_handler(client, message)
+
+@app_bot.on_message(filters.command("setup"))
+async def setup_handler(client, message):
+    await setup_archive_handler(client, message)
 
 def run_bot():
-    try:
-        loop = asyncio.get_running_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
     app_bot.run()
 
+def run_vip_checker():
+    check_and_expire_vip()
+
 if name == "main":
-    import uvicorn
     threading.Thread(target=run_bot).start()
-    uvicorn.run("bot:fast", host="0.0.0.0", port=8000, reload=False)
+    threading.Thread(target=run_vip_checker).start()
+
+    import uvicorn
+    uvicorn.run("bot:fast", host="0.0.0.0", port=8000)
