@@ -16,7 +16,7 @@ from multi_timeframe import multi_timeframe_analysis
 from daily_stock_report import send_daily_stock_summary
 
 from strategy_pdf_sender import send_strategy_pdf
-from lot_size_calculator import lot_size_calc
+from lot_size_calc import lot_size_calc
 from psychology_alerts import send_psych_alert
 from setup_archive import save_setup_result
 from performance_badge import give_performance_badge
